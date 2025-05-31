@@ -10,17 +10,17 @@ import java.util.List;
 @Service
 public class LicitacaoService {
     @Autowired
-    private LicitacaoRepository repository;
+    private LicitacaoRepository licitacaoRepository;
 
     public List<Licitacao> list() {
-        return repository.findAll();
+        return licitacaoRepository.findAll();
     }
 
     public Licitacao listByUasgCodigo(String uasgCodigo) {
-        return repository.listByUasgCodigo(uasgCodigo);
+        return licitacaoRepository.findByUasgCodigo(uasgCodigo);
     }
 
     public Licitacao listByNumeroPregao(String numeroPregao) {
-        return repository.listByNumeroPregao(numeroPregao);
+        return licitacaoRepository.findByNumeroPregao(numeroPregao);
     }
 }
