@@ -13,20 +13,20 @@ import java.util.List;
 @RequestMapping("/licitacoes")
 public class LicitacaoController {
     @Autowired
-    private LicitacaoService service;
+    private LicitacaoService licitacaoService;
 
     @GetMapping
     public List<Licitacao> list() {
-        return service.list();
+        return licitacaoService.list();
     }
 
     @GetMapping("/uasg/{uasgCodigo}")
     public Licitacao listByUasgCodigo(String uasgCodigo) {
-        return service.listByUasgCodigo(uasgCodigo);
+        return licitacaoService.listByUasgCodigo(uasgCodigo);
     }
 
     @GetMapping("/pregao/{numeroPregao}")
     public Licitacao listByNumeroPregao(String numeroPregao) {
-        return service.listByNumeroPregao(numeroPregao);
+        return licitacaoService.listByNumeroPregao(numeroPregao);
     }
 }
