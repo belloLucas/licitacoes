@@ -9,5 +9,8 @@ import java.util.List;
 @Repository
 public interface LicitacaoRepository extends JpaRepository<Licitacao, Long> {
     List<Licitacao> findByUasgCodigo(String uasgCodigo);
+
     List<Licitacao> findByNumeroPregao(String numeroPregao);
+
+    boolean existsByUasgCodigoAndNumeroPregao(String uasgCodigo, String numeroPregao);
 }

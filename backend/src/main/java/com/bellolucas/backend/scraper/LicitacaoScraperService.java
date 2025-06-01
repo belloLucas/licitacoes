@@ -56,7 +56,13 @@ public class LicitacaoScraperService {
             }
 
             Licitacao lic = new Licitacao(null, uasg, numero, descricao, edital, endereco, telefone, fax, data);
-            licitacaoRepository.save(lic);
+
+            boolean exists = licitacaoRepository.existsByUasgCodigoAndNumeroPregao(uasg, numero);
+            if (!exists) {
+                licitacaoRepository.save(lic);
+            } else {
+                System.out.println("Licitacao já existe: " + lic.getNumeroPregao());
+            }
         }
     }
 
