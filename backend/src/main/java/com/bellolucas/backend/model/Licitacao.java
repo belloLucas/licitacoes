@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "licitacoes")
@@ -18,11 +17,19 @@ public class Licitacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "uasg_codigo", nullable = false)
     private String uasgCodigo;
+
+    @Column(name = "numero_pregao", nullable = false)
     private String numeroPregao;
+
+    @Column(name = "descricao", nullable = false)
     private String descricao;
+
+    @Column(name = "data_abertura", nullable = false)
     private LocalDate dataAbertura;
 
-    @OneToMany(mappedBy = "licitacao", cascade = CascadeType.ALL)
-    private List<Item> itens;
+    //TODO: Implementar relacionamento com a entidade Item mais tarde.
+    //@OneToMany(mappedBy = "licitacao", cascade = CascadeType.ALL)
+    //private List<Item> itens;
 }
