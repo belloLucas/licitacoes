@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/licitacoes")
 public class LicitacaoController {
@@ -19,12 +21,12 @@ public class LicitacaoController {
     }
 
     @GetMapping("/uasg/{uasgCodigo}")
-    public Licitacao listByUasgCodigo(@PathVariable  String uasgCodigo) {
+    public List<Licitacao> listByUasgCodigo(@PathVariable  String uasgCodigo) {
         return licitacaoService.listByUasgCodigo(uasgCodigo);
     }
 
     @GetMapping("/pregao")
-    public Licitacao listByNumeroPregao(@RequestParam String numeroPregao) {
+    public List<Licitacao> listByNumeroPregao(@RequestParam String numeroPregao) {
         return licitacaoService.listByNumeroPregao(numeroPregao);
     }
 }

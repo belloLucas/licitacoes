@@ -4,8 +4,10 @@ import com.bellolucas.backend.model.Licitacao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface LicitacaoRepository extends JpaRepository<Licitacao, Long> {
-    Licitacao findByUasgCodigo(String uasgCodigo);
-    Licitacao findByNumeroPregao(String numeroPregao);
+    List<Licitacao> findByUasgCodigo(String uasgCodigo);
+    List<Licitacao> findByNumeroPregao(String numeroPregao);
 }
