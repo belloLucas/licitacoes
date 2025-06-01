@@ -41,7 +41,8 @@ public class Licitacao {
     @Column(name = "data_abertura", nullable = false)
     private LocalDate dataAbertura;
 
-    //TODO: Implementar relacionamento com a entidade Item mais tarde.
+    //TODO: Implementar relacionamento com a entidade Item.
+    // No momento, o site comprasnet.gov.br não está no ar, portanto tive que criar licitações mockadas e não consegui extrair os itens.
     //@OneToMany(mappedBy = "licitacao", cascade = CascadeType.ALL)
     //private List<Item> itens;
 }
