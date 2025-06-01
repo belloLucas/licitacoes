@@ -61,7 +61,7 @@ public class LicitacaoScraperService {
             if (!exists) {
                 licitacaoRepository.save(lic);
             } else {
-                System.out.println("Licitacao já existe: " + lic.getNumeroPregao());
+                throw new Exception("A licitação com UASG " + uasg + " e número " + numero + " já existe.");
             }
         }
     }
