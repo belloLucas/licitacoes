@@ -1,5 +1,6 @@
 package com.bellolucas.backend.controller;
 
+import com.bellolucas.backend.dto.LicitacaoDTO;
 import com.bellolucas.backend.model.Licitacao;
 import com.bellolucas.backend.service.LicitacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,26 +18,26 @@ public class LicitacaoController {
     private LicitacaoService licitacaoService;
 
     @GetMapping
-    public ResponseEntity<Page<Licitacao>> list(Pageable pageable) {
+    public ResponseEntity<Page<LicitacaoDTO>> list(Pageable pageable) {
         Page<Licitacao> page = licitacaoService.list(pageable);
         return page.isEmpty()
-            ? ResponseEntity.notFound().build()
-            : ResponseEntity.ok(page);
+                ? ResponseEntity.notFound().build()
+                : ResponseEntity.ok(page.map(LicitacaoDTO::new));
     }
 
     @GetMapping("/uasg/{uasgCodigo}")
-    public ResponseEntity<List<Licitacao>> listByUasgCodigo(@PathVariable  String uasgCodigo) {
+    public ResponseEntity<List<LicitacaoDTO>> listByUasgCodigo(@PathVariable String uasgCodigo) {
         List<Licitacao> licitacoes = licitacaoService.listByUasgCodigo(uasgCodigo);
         return licitacoes.isEmpty()
-            ? ResponseEntity.notFound().build()
-            : ResponseEntity.ok(licitacoes);
+                ? ResponseEntity.notFound().build()
+                : ResponseEntity.ok(licitacoes.stream().map(LicitacaoDTO::new).toList());
     }
 
     @GetMapping("/pregao")
-    public ResponseEntity<List<Licitacao>> listByNumeroPregao(@RequestParam String numeroPregao) {
+    public ResponseEntity<List<LicitacaoDTO>> listByNumeroPregao(@RequestParam String numeroPregao) {
         List<Licitacao> licitacoes = licitacaoService.listByNumeroPregao(numeroPregao);
         return licitacoes.isEmpty()
-            ? ResponseEntity.notFound().build()
-            : ResponseEntity.ok(licitacoes);
+                ? ResponseEntity.notFound().build()
+                : ResponseEntity.ok(licitacoes.stream().map(LicitacaoDTO::new).toList());
     }
 }
