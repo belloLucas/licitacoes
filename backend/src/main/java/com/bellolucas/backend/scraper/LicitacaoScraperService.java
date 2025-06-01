@@ -2,15 +2,19 @@ package com.bellolucas.backend.scraper;
 
 import com.bellolucas.backend.dto.LicitacaoDTO;
 import com.bellolucas.backend.model.Licitacao;
+import com.bellolucas.backend.repository.LicitacaoRepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -18,29 +22,38 @@ import java.util.regex.Pattern;
 
 @Service
 public class LicitacaoScraperService {
-    public List<LicitacaoDTO> extractLicitacoes() throws Exception {
-        List<LicitacaoDTO> licitacoes = new ArrayList<>();
+    @Autowired
+    private LicitacaoRepository licitacaoRepository;
 
+    public void extractLicitacoes() throws Exception {
         InputStream inputStream = new ClassPathResource("mock/mock_licitacoes_comprasnet.html").getInputStream();
         Document doc = Jsoup.parse(inputStream, StandardCharsets.UTF_8.name(), "");
 
         Elements formularios = doc.select("form");
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         for (Element form : formularios) {
-            Element td = form.selectFirst("td");
+            Element td = form.select("table td").get(1);
+
             if (td == null) continue;
 
             String text = td.text();
 
             String uasg = extrair(text, "Código da UASG:\\s*(\\d+)");
             String numero = extrair(text, "(?:Pregão|Tomada)\\s+.*?Nº\\s*(\\d+/\\d+)");
-            String objeto = extrair(text, "Objeto:\\s+[^-]+-\\s*(.+?)\\s*(Edital a partir de:|Endereço:)");
+            String descricao = extrair(text, "Objeto:\\s*(?:Objeto:\\s*)?(.+?)\\s*(Edital a partir de:|Endereço:)");
             String entrega = extrair(text, "Entrega da Proposta:\\s*(\\d{2}/\\d{2}/\\d{4} às [^\\s<]+)");
 
-            licitacoes.add(new LicitacaoDTO(uasg, numero, objeto, entrega));
-        }
+            LocalDate data = null;
+            if (entrega != null && entrega.length() >= 10) {
+                String dataStr = entrega.substring(0, 10);
+                data = LocalDate.parse(dataStr, formatter);
+            }
 
-        return licitacoes;
+            Licitacao lic = new Licitacao(null, uasg, numero, descricao, data);
+            licitacaoRepository.save(lic);
+        }
     }
 
     public String extrair(String texto, String padrão) {
