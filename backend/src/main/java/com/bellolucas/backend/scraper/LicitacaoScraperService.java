@@ -43,6 +43,10 @@ public class LicitacaoScraperService {
             String uasg = extrair(text, "Código da UASG:\\s*(\\d+)");
             String numero = extrair(text, "(?:Pregão|Tomada)\\s+.*?Nº\\s*(\\d+/\\d+)");
             String descricao = extrair(text, "Objeto:\\s*(?:Objeto:\\s*)?(.+?)\\s*(Edital a partir de:|Endereço:)");
+            String edital = extrair(text, "Edital a partir de:\\s*([\\d/]+ das [^\\s<]+)");
+            String endereco = extrair(text, "Endereço:\\s*(.+?)\\s*Telefone:");
+            String telefone = extrair(text, "Telefone:\\s*(.+?)(?=\\s*Fax:|\\s*Entrega da Proposta:|$)");
+            String fax = extrair(text, "Fax:\\s*(.+?)(?=\\s*Entrega da Proposta:|$)");
             String entrega = extrair(text, "Entrega da Proposta:\\s*(\\d{2}/\\d{2}/\\d{4} às [^\\s<]+)");
 
             LocalDate data = null;
@@ -51,7 +55,7 @@ public class LicitacaoScraperService {
                 data = LocalDate.parse(dataStr, formatter);
             }
 
-            Licitacao lic = new Licitacao(null, uasg, numero, descricao, data);
+            Licitacao lic = new Licitacao(null, uasg, numero, descricao, edital, endereco, telefone, fax, data);
             licitacaoRepository.save(lic);
         }
     }

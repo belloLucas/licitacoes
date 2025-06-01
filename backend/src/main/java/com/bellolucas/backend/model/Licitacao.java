@@ -26,6 +26,18 @@ public class Licitacao {
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
+    @Column(name = "edital", nullable = false)
+    private String edital;
+
+    @Column(name = "endereco", nullable = false)
+    private String endereco;
+
+    @Column(name = "telefone")
+    private String telefone;
+
+    @Column(name = "fax")
+    private String fax;
+
     @Column(name = "data_abertura", nullable = false)
     private LocalDate dataAbertura;
 
