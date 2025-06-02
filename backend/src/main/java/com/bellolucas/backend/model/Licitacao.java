@@ -41,8 +41,14 @@ public class Licitacao {
     @Column(name = "data_abertura", nullable = false)
     private LocalDate dataAbertura;
 
+    @Column(name = "itens_urL")
+    private String itensUrl;
+
     //TODO: Implementar relacionamento com a entidade Item.
     // No momento, o site comprasnet.gov.br não está no ar, portanto tive que criar licitações mockadas e não consegui extrair os itens.
+    // Não consegui em tempo hábil, portanto pensei em ter uma coluna itens_url que armazenaria o link da página dos itens da licitação,
+    // caso no front end o usuário quisesse ver os itens, ele teria um botão que iria o redirecionar para a página dos itens no comprasnet.
+    // Mas o relacionamento seria algo como:
     //@OneToMany(mappedBy = "licitacao", cascade = CascadeType.ALL)
     //private List<Item> itens;
 }
