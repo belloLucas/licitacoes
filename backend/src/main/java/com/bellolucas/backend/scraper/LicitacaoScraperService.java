@@ -25,6 +25,8 @@ public class LicitacaoScraperService {
     @Autowired
     private LicitacaoRepository licitacaoRepository;
 
+    private final String ITEMS_BASE_URL = "http://comprasnet.gov.br/ConsultaLicitacoes/download/download_editais_detalhe.asp";
+
     public void extractLicitacoes() throws Exception {
         InputStream inputStream = new ClassPathResource("mock/mock_licitacoes_comprasnet.html").getInputStream();
         Document doc = Jsoup.parse(inputStream, StandardCharsets.UTF_8.name(), "");
@@ -55,7 +57,19 @@ public class LicitacaoScraperService {
                 data = LocalDate.parse(dataStr, formatter);
             }
 
-            Licitacao lic = new Licitacao(null, uasg, numero, descricao, edital, endereco, telefone, fax, data);
+            Licitacao lic = new Licitacao(null, uasg, numero, descricao, edital, endereco, telefone, fax, data, null);
+
+            Element inputItens = form.selectFirst("input[name=itens][type=button]");
+            String parametros = null;
+            if (inputItens != null) {
+                String onclick = inputItens.attr("onclick");
+                Pattern pattern = Pattern.compile("'(\\?coduasg=[^']+)'");
+                Matcher matcher = pattern.matcher(onclick);
+                if (matcher.find()) {
+                    parametros = matcher.group(1);
+                    lic.setItensUrl(ITEMS_BASE_URL + parametros);
+                }
+            }
 
             boolean exists = licitacaoRepository.existsByUasgCodigoAndNumeroPregao(uasg, numero);
             if (!exists) {
