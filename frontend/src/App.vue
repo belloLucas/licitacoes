@@ -1,30 +1,35 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from "./components/Header.vue";
+import LicitacoesList from "./components/LicitacoesList.vue";
+import SearchFilters from "./components/SearchFilters.vue";
+
+import { ref } from "vue";
+
+const currentDate = new Date();
+const formattedDate = currentDate.toLocaleDateString("pt-BR", {
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+});
+
+const filters = ref({});
+
+const handleSearch = (newFilters) => {
+  filters.value = newFilters;
+};
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <Header />
+  <main class="container mx-auto p-4">
+    <SearchFilters @search="handleSearch" />
+    <div class="mt-6">
+      <h2 class="text-xl font-semibold mb-4">
+        Licitações publicadas no Diário Oficial da União em {{ formattedDate }}
+      </h2>
+      <LicitacoesList :filters="filters" />
+    </div>
+  </main>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<style scoped></style>
