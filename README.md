@@ -8,6 +8,31 @@ A estrutura do scraping é baseada na estrutura do `.html` do `comprasnet.gov.br
 
 O projeto utiliza o banco de dados em memória H2 do Java.
 
+## Tecnologias Utilizadas
+
+Neste projeto foram utilizadas as seguintes tecnologias:
+
+#### Front End:
+
+- Vue.js
+- Javascript
+- Tailwind
+- Vite
+
+#### Back End
+
+- Java 21
+- Spring Boot 3.5
+- H2 Database
+
+#### Infraestrutura
+
+- Docker
+
+## Atenção:
+
+- É necessário ter o Docker em sua máquina para rodar o projeto.
+
 ## Rodando o projeto
 
 #### 1. Faça o clone do projeto
@@ -24,19 +49,13 @@ git clone https://github.com/belloLucas/licitacoes.git
 3. npm i
 ```
 
-#### 3. Depois, entre no diretório backend e instale as dependências
-
-```bash
-
-```
-
-#### 4. Volte ao diretório raiz `licitacoes` e execute os containers
+#### 3. Volte ao diretório raiz `licitacoes` e execute os containers
 
 ```bash
 docker-compose up -d
 ```
 
-#### 5. Acesse o projeto.
+#### 4. Acesse o projeto.
 
 O front end fica acessível na url
 
@@ -74,8 +93,7 @@ http://localhost:8080/swagger-ui/index.html
 
 ## A Fazer:
 
-1. Dockerizar
-2. Criar testes para back e front end
+1. Criar testes para back e front end
 
 ## Considerações finais
 
