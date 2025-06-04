@@ -1,0 +1,22 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    networks:
+      - licitacoes-network
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    networks:
+      - licitacoes-network
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+networks:
+  licitacoes-network:
+    driver: bridge
