@@ -85,3 +85,5 @@ http://localhost:8080/swagger-ui/index.html
   - Bom, no projeto atual estou fazendo uma paginação no próprio backend, pelo endpoint /licitacoes, mas isso não impede de o banco de dados processar a consulta inteira. Acredito que para evitar isso, poderíamos fazer uso de índices no banco de dados para os campos mais usados nos filtros e na ordenação, dessa forma o banco de dados teria muito mais agilidade em acessar as informações mais relevantes.
 
   - Melhorar otimização com DTO's: Atualmente eu usei somente um DTO que retorna basicamente todos os dados de uma Licitação. Eu acredito que, para otimizar um pouco as consultas, poderíamos ter diferentes DTO's que retornassem apenas algum dado específico que fosse necessário, por exemplo, um DTO que retorna apenas o código UASG e o número do Pregao.
+
+- Eu nunca havia estudado sobre scraping e muito menos praticado antes. Como comentei no começo do README, se eu tiver um pouco mais de tempo hábil para estudar sobre scraping e como realizar o mesmo, os resultados teriam sido melhores.
