@@ -71,3 +71,14 @@ Mais detalhes dos endpoints podem ser vistos via swagger:
 ```bash
 http://localhost:8080/swagger-ui/index.html
 ```
+
+## A Fazer:
+
+1. Dockerizar
+2. Criar testes para back e front end
+3. Responder pergunta.
+
+## Considerações finais
+
+1. Tempo Estimado Gasto: por volta de 07h50m, via WakaTime.
+2. Pergunta Aberta:
