@@ -76,9 +76,12 @@ http://localhost:8080/swagger-ui/index.html
 
 1. Dockerizar
 2. Criar testes para back e front end
-3. Responder pergunta.
 
 ## Considerações finais
 
-1. Tempo Estimado Gasto: por volta de 07h50m, via WakaTime.
-2. Pergunta Aberta:
+- Tempo Estimado Gasto: por volta de 07h50m, via WakaTime.
+- Pergunta Aberta:
+
+  - Bom, no projeto atual estou fazendo uma paginação no próprio backend, pelo endpoint /licitacoes, mas isso não impede de o banco de dados processar a consulta inteira. Acredito que para evitar isso, poderíamos fazer uso de índices no banco de dados para os campos mais usados nos filtros e na ordenação, dessa forma o banco de dados teria muito mais agilidade em acessar as informações mais relevantes.
+
+  - Melhorar otimização com DTO's: Atualmente eu usei somente um DTO que retorna basicamente todos os dados de uma Licitação. Eu acredito que, para otimizar um pouco as consultas, poderíamos ter diferentes DTO's que retornassem apenas algum dado específico que fosse necessário, por exemplo, um DTO que retorna apenas o código UASG e o número do Pregao.
