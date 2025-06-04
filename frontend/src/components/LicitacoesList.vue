@@ -98,10 +98,7 @@ onMounted(() => {
                 </div>
               </div>
 
-              <button
-                class="flex items-center justify-center"
-                @click="toggleAccordion(licitacao.id)"
-              >
+              <button class="flex items-center justify-center">
                 <component
                   :is="
                     activeAccordion === licitacao.id ? ChevronUp : ChevronDown
