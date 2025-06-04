@@ -18,11 +18,11 @@ public class LicitacaoService {
         return licitacaoRepository.findAll(pageable);
     }
 
-    public List<Licitacao> listByUasgCodigo(String uasgCodigo) {
-        return licitacaoRepository.findByUasgCodigo(uasgCodigo);
+    public Page<Licitacao> listByUasgCodigo(String uasgCodigo, Pageable pageable) {
+        return licitacaoRepository.findByUasgCodigo(uasgCodigo, pageable);
     }
 
-    public List<Licitacao> listByNumeroPregao(String numeroPregao) {
-        return licitacaoRepository.findByNumeroPregao(numeroPregao);
+    public Page<Licitacao> listByNumeroPregao(String numeroPregao, Pageable pageable) {
+        return licitacaoRepository.findByNumeroPregao(numeroPregao, pageable);
     }
 }

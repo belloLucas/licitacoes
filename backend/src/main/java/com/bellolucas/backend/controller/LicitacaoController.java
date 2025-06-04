@@ -26,18 +26,19 @@ public class LicitacaoController {
     }
 
     @GetMapping("/uasg/{uasgCodigo}")
-    public ResponseEntity<List<LicitacaoDTO>> listByUasgCodigo(@PathVariable String uasgCodigo) {
-        List<Licitacao> licitacoes = licitacaoService.listByUasgCodigo(uasgCodigo);
-        return licitacoes.isEmpty()
+    public ResponseEntity<Page<LicitacaoDTO>> listByUasgCodigo(
+            @PathVariable String uasgCodigo, Pageable pageable) {
+        Page<Licitacao> page = licitacaoService.listByUasgCodigo(uasgCodigo, pageable);
+        return page.isEmpty()
                 ? ResponseEntity.notFound().build()
-                : ResponseEntity.ok(licitacoes.stream().map(LicitacaoDTO::new).toList());
+                : ResponseEntity.ok(page.map(LicitacaoDTO::new));
     }
 
     @GetMapping("/pregao")
-    public ResponseEntity<List<LicitacaoDTO>> listByNumeroPregao(@RequestParam String numeroPregao) {
-        List<Licitacao> licitacoes = licitacaoService.listByNumeroPregao(numeroPregao);
-        return licitacoes.isEmpty()
+    public ResponseEntity<Page<LicitacaoDTO>> listByNumeroPregao(@RequestParam String numeroPregao, Pageable pageable) {
+        Page<Licitacao> page = licitacaoService.listByNumeroPregao(numeroPregao, pageable);
+        return page.isEmpty()
                 ? ResponseEntity.notFound().build()
-                : ResponseEntity.ok(licitacoes.stream().map(LicitacaoDTO::new).toList());
+                : ResponseEntity.ok(page.map(LicitacaoDTO::new));
     }
 }
