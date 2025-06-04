@@ -49,7 +49,7 @@ const handleSearch = (e) => {
       <div class="flex items-end">
         <button
           type="submit"
-          class="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded flex items-center"
+          class="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded flex items-center cursor-pointer"
         >
           <Search class="w-4 h-4 mr-2" />
           Buscar

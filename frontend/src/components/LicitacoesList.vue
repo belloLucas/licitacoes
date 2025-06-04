@@ -179,7 +179,11 @@ onMounted(() => {
 
     <div class="flex justify-between items-center mt-10">
       <button
-        class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 cursor-pointer"
+        class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
+        :class="{
+          'cursor-not-allowed opacity-50': currentPage === 0,
+          'cursor-pointer': currentPage !== 0,
+        }"
         :disabled="currentPage === 0"
         @click="goToPreviousPage"
       >
@@ -191,7 +195,11 @@ onMounted(() => {
       </span>
 
       <button
-        class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 cursor-pointer"
+        class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
+        :class="{
+          'cursor-not-allowed opacity-50': currentPage === totalPages - 1,
+          'cursor-pointer': currentPage !== totalPages - 1,
+        }"
         :disabled="currentPage === totalPages - 1"
         @click="goToNextPage"
       >
